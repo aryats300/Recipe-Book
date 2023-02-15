@@ -8,8 +8,8 @@ import { Recipe } from '../recipe.model';
 export class RecipeListComponent {
   @Output() recipeWasSelected=new EventEmitter<Recipe>();
   recipes:Recipe[] = [
-    new Recipe('A test Recipe', 'This is simply a test',' https://dcassetcdn.com/design_img/10150/1680/1680_298517_10150_image.jpg'), 
-    new Recipe('A test Recipe', 'This is simply a test',' https://dcassetcdn.com/design_img/10150/1680/1680_298517_10150_image.jpg') 
+    new Recipe('Pasta', 'Pasta casserole with tomatoes and mozzarella cheese in a cast iron pan on a light grey slate, stone or concrete background.','https://media.istockphoto.com/id/1190036539/photo/pasta-casserole-with-tomatoes-and-mozzarella-cheese-in-a-cast-iron-pan.jpg?b=1&s=170667a&w=0&k=20&c=iPbpz032rVCcSLZ3VEk3vE27XTr1B46cL2l3TTWxHJ4='), 
+    new Recipe('Cherry Cream Cheese Dessert', 'Pretty layers of graham cracker crumbs, tasty filling and fruit topping make these cream cheese desserts a standout! For a nice change, you can substitute blueberry pie filling or another fruit flavor for the filling called for in the recipe.','https://www.tasteofhome.com/wp-content/uploads/2018/01/exps21585_THCA153054D10_15_4b.jpg') 
   ];
   constructor(){}
   ngOnInit(){
