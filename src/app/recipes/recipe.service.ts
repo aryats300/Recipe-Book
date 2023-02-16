@@ -1,5 +1,7 @@
+import { EventEmitter } from "@angular/core";
 import { Recipe } from "./recipe.model";
 export class RecipeService{
+    recipeSelected=new EventEmitter<Recipe>();
      
     private recipes:Recipe[] = [
         new Recipe('Pasta', 'Pasta casserole with tomatoes and mozzarella cheese in a cast iron pan on a light grey slate, stone or concrete background.','https://media.istockphoto.com/id/1190036539/photo/pasta-casserole-with-tomatoes-and-mozzarella-cheese-in-a-cast-iron-pan.jpg?b=1&s=170667a&w=0&k=20&c=iPbpz032rVCcSLZ3VEk3vE27XTr1B46cL2l3TTWxHJ4='), 
