@@ -16,7 +16,7 @@ export class RecipeService{
           new Ingredient('Tomatos',1),
         ]),
         new Recipe('Cherry Cream Cheese Dessert', 
-        'Pretty layers of graham cracker crumbs, tasty filling and fruit topping make these cream cheese desserts a standout! For a nice change, you can substitute blueberry pie filling or another fruit flavor for the filling called for in the recipe.',
+        'Pretty layers of graham cracker crumbs,tasty filling and fruit topping make these cream cheese desserts a standout!', 
         'https://www.tasteofhome.com/wp-content/uploads/2018/01/exps21585_THCA153054D10_15_4b.jpg',
         [
           new Ingredient('Cup crushed shortbread cookies ',1),
@@ -31,6 +31,9 @@ export class RecipeService{
     
       getRecipes(){
         return this.recipes.slice();
+      }
+      getRecipe(index: number){
+        return this.recipes.slice()[index];
       }
       addingIngredientsToShoppingList(ingredients:Ingredient[]){
         this.slService.addIngredients(ingredients);
