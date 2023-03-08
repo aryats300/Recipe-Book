@@ -16,23 +16,33 @@ export class DataStorageService {
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
+    console.log('Recipes being sent to Firebase:', recipes); // Log the recipes data being sent to Firebase
     this.http
       .put(
-        'https://recipebook-3b7ac-default-rtdb.firebaseio.com/recipes.json',
+        'https://recipebook-caa90-default-rtdb.firebaseio.com/recipes.json',
         recipes
       )
-      .subscribe(response => {
-        console.log(response);
-      });
+      .subscribe(
+        response => {
+          console.log('Firebase response:', response); // Log the response from Firebase
+        },
+        error => {
+          console.error('Error storing recipes in Firebase:', error); // Log any errors that occur
+        }
+      );
   }
-
+  
   fetchRecipes() {
     return this.http
       .get<Recipe[]>(
-        'https://recipebook-3b7ac-default-rtdb.firebaseio.com/recipes.json'
+        'https://recipebook-caa90-default-rtdb.firebaseio.com/recipes.json'
       )
       .pipe(
         map(recipes => {
+          if (!recipes) {
+            return []; 
+          }
+  
           return recipes.map(recipe => {
             return {
               ...recipe,
@@ -45,4 +55,5 @@ export class DataStorageService {
         })
       );
   }
+  
 }
