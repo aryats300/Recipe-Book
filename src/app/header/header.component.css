@@ -1,0 +1,13 @@
+nav {
+    background-color: burlywood;
+}
+
+a {
+    color: black !important;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.logo{
+    height: 50px;
+}
+

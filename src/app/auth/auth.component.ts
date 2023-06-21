@@ -1,25 +1,32 @@
-import { Component,OnDestroy, ViewChild,ComponentFactoryResolver } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable,Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AuthService, AuthResponseData } from './auth.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html'
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnDestroy {
+export class AuthComponent implements OnDestroy{
   isLoginMode = true;
   isLoading = false;
   error: string = null;
-  @ViewChild(PlaceholderDirective,{static:false})alertHost:PlaceholderDirective;
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
 
-  private closeSub: Subscription; 
+  private closeSub: Subscription;
 
-  constructor(private authService: AuthService,private router:Router,private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(private authService: AuthService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver) { }
+  ngOnDestroy() {
+    if(this.closeSub){
+      this.closeSub.unsubscribe();
+    }
+  }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -51,27 +58,21 @@ export class AuthComponent implements OnDestroy {
       errorMessage => {
         console.log(errorMessage);
         this.error = errorMessage;
+        this.showErrorAlert(errorMessage);
         this.isLoading = false;
       }
     );
 
     form.reset();
   }
-  onHandleError(){
-    this.error=null;
-  }
-  ngOnDestroy() {
-    if (this.closeSub) {
-      this.closeSub.unsubscribe();
-    }
-  }
 
+  onHandleError() {
+    this.error = null;
+  }
 
   private showErrorAlert(message: string) {
     // const alertCmp = new AlertComponent();
-    const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(
-      AlertComponent
-    );
+    const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
     const hostViewContainerRef = this.alertHost.viewContainerRef;
     hostViewContainerRef.clear();
 
